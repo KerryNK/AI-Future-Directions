@@ -1,8 +1,7 @@
 tensorflow
 numpy
-Pillow
 opencv-python
+Pillow
 matplotlib
 scikit-learn
-tflite-runtime
-imgaug
+keras
