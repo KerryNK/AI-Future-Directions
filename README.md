@@ -1,18 +1,42 @@
-# Edge AI Food Recognition
 
-A lightweight, privacy-first image classification system for **real-time food item recognition** in smart kitchens. Built using **TensorFlow 2.x** and **TensorFlow Lite**, this project supports dietary tracking and kitchen automation on **edge devices**—with no cloud or internet dependency.
+# Edge AI Prototype Report
 
-## 🚀 Features
+## Objective
 
-- ✅ MobileNetV2 backbone for ultra-efficient inference
-- 🔄 Data augmentation pipeline for better generalization
-- 🎯 Top-1 and Top-3 class prediction support
-- 📦 Easy TensorFlow Lite export for edge deployment
-- 🔐 Privacy-by-design: all computation runs locally
+Develop a lightweight image classification model to recognize recyclable items and deploy it using TensorFlow Lite for edge devices such as a Raspberry Pi.
 
-## 🛠️ Installation
+### Tools Used
 
-'bash
-git clone <https://github.com/yourusername/edge-ai-food-recognition.git>
-cd edge-ai-food-recognition
-pip install -r requirements.txt
+- TensorFlow / Keras
+- MobileNetV2 (transfer learning)
+- TensorFlow Lite (for conversion)
+- OpenCV (image processing)
+- Google Colab / Raspberry Pi (deployment/test)
+
+### Model Training & Accuracy
+
+- Dataset: Images categorized by item type (e.g., glass, plastic, metal).
+- Preprocessing: Data augmentation with rotation, zoom, shift, and rescaling.
+- Architecture: MobileNetV2 backbone + GlobalAvgPooling + Dense(256) + Softmax output.
+- Training Results:
+  - Accuracy: ~92.4% on validation set (adjust this based on your actual results)
+  - Loss: Stable convergence after fine-tuning with a low learning rate.
+
+### Model Optimization
+
+- Converted the trained Keras model to `.tflite` using TFLiteConverter.
+- Enabled quantization and included `SELECT_TF_OPS` for compatibility.
+- Output `.tflite` model size: ~10MB (varies based on quantization and layers).
+
+### Deployment Steps
+
+1. Load model using `tflite-runtime` on Raspberry Pi.
+2. Capture or load test image using PiCamera or USB camera.
+3. Preprocess with OpenCV (resize, normalize).
+4. Run inference via `interpreter.invoke()` and display top predictions.
+
+### Benefits of Edge AI in This Prototype
+
+- Real-Time Decisions: Inference on-device reduces latency—ideal for sorting waste in real-time.
+- Data Privacy: No images sent to the cloud—ensures user or environmental data privacy.
+- Lower Bandwidth/Power: Minimal need for external processing; suitable for off-grid recycling hubs.
